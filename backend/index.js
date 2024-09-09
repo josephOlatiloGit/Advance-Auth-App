@@ -5,15 +5,13 @@ import authRoutes from "./routes/auth.route.js";
 
 const app = express();
 dotenv.config(); // To access the env file
-
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
+const PORT = process.env.PORT || 5000;
 
 // middlewares
+app.use(express.json()); // allows us to pass incoming request: req.body
 app.use("/api/auth", authRoutes);
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   connectDB();
-  console.log("Server running on port 3000");
+  console.log("Server running on port", PORT);
 });
