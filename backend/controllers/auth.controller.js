@@ -35,7 +35,8 @@ export const signup = async (req, res) => {
     // jwt after signup sent to the user
     generateTokenAndSetCookie(res, user._id);
 
-    res.status(201).json({
+    console.log("user", user);
+    return res.status(201).json({
       success: true,
       message: "User created successfully",
       user: {
@@ -43,9 +44,8 @@ export const signup = async (req, res) => {
         password: undefined,
       },
     });
-    console.log(user);
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    return res.status(400).json({ success: false, message: error.message });
   }
 };
 
