@@ -72,7 +72,14 @@ function App() {
       ))}
 
       <Routes>
-        <Route path="/" element={<DashboardPage />} />
+        <Route
+          path="/"
+          element={
+            <ProtectRoute>
+              <DashboardPage />
+            </ProtectRoute>
+          }
+        />
         <Route
           path="/signup"
           element={
