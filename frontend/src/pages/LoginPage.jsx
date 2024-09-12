@@ -8,6 +8,7 @@ import PasswordStrengthMeter from "../components/PasswordStrengthMeter";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const isLoading = false;
   const handleLogin = async (e) => {
     e.preventDefault();
   };
@@ -53,15 +54,20 @@ export default function LoginPage() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             type="submit"
+            disabled={isLoading}
           >
-            Login
+            {isLoading ? (
+              <Loader className="w-6 h-6 animate-spin mx-auto" />
+            ) : (
+              " Login"
+            )}
           </motion.button>
         </form>
       </div>
       <div className="px-8 py-4 bg-gray-900 bg-opacity-50 flex justify-center">
         <p className="text-sm text-gray-400">
           Don't have an account?{" "}
-          <Link to={"/sign-up"} className="text-green-400 hover:underline">
+          <Link to={"/signup"} className="text-green-400 hover:underline">
             {" "}
             Sign Up
           </Link>
