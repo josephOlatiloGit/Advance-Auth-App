@@ -105,6 +105,7 @@ export const useAuthStore = create((set) => ({
   },
 
   checkAuth: async () => {
+    // await new Promise((resolve) => setTimeout(resolve, 2000)); // delay page load before checkAuth 2sec
     set({ isCheckingAuth: true, error: null });
 
     try {

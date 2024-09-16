@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
 import DashboardPage from "./pages/DashboardPage";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 /*
 Here we Redirect authenticated users to the home page
@@ -33,7 +34,7 @@ const RedirectAuthenticatedUser = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
 
   if (isAuthenticated && user.isVerified) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   return children;
@@ -46,8 +47,7 @@ function App() {
     checkAuth();
   }, [checkAuth]);
 
-  console.log("isAuthenticated:", isAuthenticated);
-  console.log("user:", user);
+  if (isCheckingAuth) return <LoadingSpinner />;
 
   const shapes = [
     { color: "bg-green-500", size: "w-64 h-64", top: "-5%", left: "10%" },
