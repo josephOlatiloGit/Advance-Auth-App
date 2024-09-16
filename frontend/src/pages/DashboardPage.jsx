@@ -4,9 +4,11 @@ import { useAuthStore } from "../store/authStore";
 import { formatDate } from "../utils/date";
 
 export default function DashboardPage() {
-  const { user } = useAuthStore();
+  const { user, logout } = useAuthStore();
 
-  const handleLogout = async () => {};
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <motion.div
