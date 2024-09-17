@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Input from "../components/Input";
 import { Lock } from "lucide-react";
+import toast from "react-hot-toast";
 
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
@@ -13,7 +14,26 @@ export default function ResetPasswordPage() {
   const { token } = useParams();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("Password do not match");
+      return;
+    }
+    try {
+      await resetPassword(token, password);
+
+      toast.success("Password rest successfully, redirecting to login page...");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000); //return to login
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message || "Error resting password");
+    }
+  };
 
   return (
     <motion.div
